@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZenLife</title>
+    <link rel="stylesheet" href="gerarrotina.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZenLife - Gerar Rotina</title>
+    <link rel="stylesheet" href="gerar_rotina.css">
+</head>
+<body>
+
+<header>
+    <h1>ZenLife</h1>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="login.html">Login</a>
+    </nav>
+</header>
+
+<main>
+    <h2>Gerar Rotina</h2>
+    <form id="gerarRotinaForm" onsubmit="submitForm(event)">
+        <label for="altura">1. Qual sua altura?</label>
+        <input type="text" id="altura" name="altura" required>
+
+        <label for="peso">2. Qual seu peso?</label>
+        <input type="text" id="peso" name="peso" required>
+
+        <label>3. Quantos dias por semana você tem disponibilidade para se exercitar?</label>
+        <select id="diasDisponibilidade" name="diasDisponibilidade" required>
+            <option value="">Selecione...</option>
+            <option value="1-2">1-2 dias</option>
+            <option value="3-4">3-4 dias</option>
+            <option value="5-6">5-6 dias</option>
+            <option value="7">7 dias</option>
+        </select>
+
+        <label>4. Nos dias em que você se exercita, você utiliza exercícios de máquinas ou de peso corporal?</label>
+        <select id="tipoExercicio" name="tipoExercicio" required>
+            <option value="">Selecione...</option>
+            <option value="maquinas">Apenas máquinas</option>
+            <option value="corpo">Apenas peso corporal</option>
+            <option value="ambos">Ambos</option>
+        </select>
+
+        <label>5. Qual a disponibilidade de tempo para praticar sua rotina?</label>
+        <select id="tempoDisponivel" name="tempoDisponivel" required>
+            <option value="">Selecione...</option>
+            <option value="15-30">15 a 30 minutos</option>
+            <option value="30-60">30 minutos a 1 hora</option>
+            <option value="60-120">1 a 2 horas</option>
+        </select>
+
+        <label>6. Você tem alguma restrição física ou lesão que devemos considerar?</label>
+        <select id="restricao" name="restricao" required>
+            <option value="">Selecione...</option>
+            <option value="sim">Sim</option>
+            <option value="nao">Não</option>
+        </select>
+        <label for="regiaoRestricao">Se sim, em qual região?</label>
+        <input type="text" id="regiaoRestricao" name="regiaoRestricao">
+
+        <label>7. Quais áreas musculares você deseja melhorar?</label>
+        <select id="areasMusculares" name="areasMusculares" required>
+            <option value="">Selecione...</option>
+            <option value="pernas">Pernas</option>
+            <option value="bracos">Braços e ombros</option>
+            <option value="abdominal">Abdômen e peito</option>
+            <option value="costas">Costas</option>
+            <option value="preferencia">Não tenho preferência</option>
+        </select>
+
+        <label>8. Qual a duração desejada de sua rotina?</label>
+        <select id="duracao" name="duracao" required>
+            <option value="">Selecione...</option>
+            <option value="10">10 dias</option>
+            <option value="15">15 dias</option>
+            <option value="20">20 dias</option>
+        </select>
+
+        <button type="submit">Gerar Rotina</button>
+    </form>
+</main>
+
+<script>
+    function submitForm(event) {
+        event.preventDefault(); // Impede o envio padrão do formulário
+        // Aqui você pode adicionar lógica para processar a geração da rotina
+
+        // Redireciona para o menu principal
+        window.location.href = 'menu.html';
+    }
+</script>
+
+</body>
+</html>
+
+</body>
