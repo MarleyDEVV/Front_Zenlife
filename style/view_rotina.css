@@ -1,0 +1,79 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background-color: darkblue;
+    font-family: "Poppins", sans-serif;
+    max-height: 1200px;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: rgb(3, 143, 3);
+    color: white;
+}
+
+h2{
+    color: white;
+    text-align: center;
+}
+
+nav a {
+    margin-left: 15px;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s, transform 0.3s;
+}
+
+nav a:hover {
+    color: rgb(5, 55, 131);
+    transform: scale(1.1);
+}
+
+#visualizar_rotina {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    padding: 20px;
+}
+
+.treino-card {
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    padding: 20px;
+    margin: 10px;
+    transition: transform 0.2s;
+}
+
+.treino-card:hover {
+    transform: translateY(-5px);
+}
+
+.treino-card h3 {
+    font-size: 18px;
+    margin-bottom: 15px;
+    color: #333333;
+}
+
+.treino-card ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.treino-card li {
+    background-color: #f8f8f8;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    border-left: 5px solid #6C63FF;
+}
+
+.treino-card li strong {
+    color: #6C63FF;
+}
