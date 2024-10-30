@@ -1,4 +1,4 @@
-const apiBaseUrl = "http://localhost:8080/api/"; // Altere para o URL da sua API
+const apiBaseUrl = "https://zenlife-u3or.onrender.com/api/"; // Altere para o URL da sua API
 
 async function submitForm(event) {
   event.preventDefault(); // Impede o envio padrão do formulário
@@ -77,7 +77,7 @@ function renderRotina(rotina) {
   const container = document.getElementById("visualizar_rotina");
   container.innerHTML = ""; // Limpa o conteúdo antes de renderizar
 
-  rotina.rotina[0].treinos.forEach((treino, index) => {
+  rotina.rotina[1].treinos.forEach((treino, index) => {
     // Criação do card de treino
     const treinoCard = document.createElement("div");
     treinoCard.classList.add("treino-card");
