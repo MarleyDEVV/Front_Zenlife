@@ -101,8 +101,18 @@ function renderRotina(rotina) {
           `;
       exercicioList.appendChild(exercicioItem);
     });
-
     treinoCard.appendChild(exercicioList);
+
+    // Botão para informações detalhadas
+    const infoButton = document.createElement("button");
+    infoButton.textContent = "Informações Treino";
+    infoButton.classList.add("info-button");
+    infoButton.onclick = () => {
+      // Redirecionar para uma nova página ou tela
+    window.location.href = `/informacoes-treino/${index + 1}`;
+};
+treinoCard.appendChild(infoButton);
+
     container.appendChild(treinoCard);
   });
 }

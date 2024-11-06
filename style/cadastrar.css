@@ -53,7 +53,7 @@ input, select {
     border: none; /* Removido o border padrão */
     border-radius: 5px;
     background-color: rgba(255, 255, 255, 0.1); /* Cor de fundo leve */
-    color: white; /* Texto branco */
+    color: black; /* Texto branco */
 }
 
 button {

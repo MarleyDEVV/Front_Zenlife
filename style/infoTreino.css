@@ -51,6 +51,11 @@ form {
     flex-direction: column;
 }
 
+#form-treino{
+    display: flex;
+    flex-direction: column;
+    margin:300px;
+}
 label {
     margin-top: 30px;
     font-weight: bold;
@@ -73,7 +78,7 @@ button {
     padding: 10px;
     margin-top: 20px;
     background-color: #4caf50;
-    color: black;
+    color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
