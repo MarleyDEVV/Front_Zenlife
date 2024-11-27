@@ -1,4 +1,4 @@
-const apiBaseUrl = "https://zenlife-u3or.onrender.com/api/"; // Altere para o URL da sua API
+const apiBaseUrl = "http://127.0.0.1:8080/api/"; // Altere para o URL da sua API
 
 async function submitForm(event) {
   event.preventDefault(); // Impede o envio padrão do formulário
@@ -115,6 +115,82 @@ treinoCard.appendChild(infoButton);
 
     container.appendChild(treinoCard);
   });
+}
+
+
+async function cadastrar(event) {
+  event.preventDefault(); // Impede o envio padrão do formulário
+
+  const formData = {
+    nome: document.getElementById("nome").value,
+    login: document.getElementById("email").value,
+    senha: document.getElementById("senha").value,
+    senha2: document.getElementById("senha2").value,
+    data_nasc: document.getElementById("dataNascimento").value,
+    genero: document.getElementById("genero").value,
+  };
+
+  try {
+    const response = await fetch(`${apiBaseUrl}user/cadastro`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(formData),
+    });
+
+    if (!response.ok) {
+      throw new Error(`Erro: ${response.status}`);
+    }
+
+    const result = await response.json();
+    if (result) {
+      document.getElementById(
+        "result"
+      ).innerText = `Cadastro criado com sucesso!`;
+
+      setTimeout(() => {
+        window.location.href = "Login.html";
+      }, 2000);
+    }
+  } catch (error) {
+    document.getElementById(
+      "result"
+    ).innerText = `Erro ao fazer cadastro: ${error.message}`;
+  }
+}
+
+async function login(event){
+  event.preventDefault();
+  const formData = {
+    login: document.getElementById("email").value,
+    senha: document.getElementById("senha").value,
+  };
+
+  try {
+    const response = await fetch(`${apiBaseUrl}login`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(formData),
+    });
+
+    if (!response.ok) {
+      throw new Error(`Erro: ${response.status}`);
+    }
+
+    const result = await response.json();
+    if (result) {
+      document.getElementById(
+        "result"
+      ).innerText = `Login realizado com sucesso!`;
+
+      setTimeout(() => {
+        window.location.href = "menu.html";
+      }, 2000);
+    }
+  } catch (error) {
+    document.getElementById(
+      "result"
+    ).innerText = `Erro ao fazer login: ${error.message}`;
+  }
 }
 
 // Função para deslogar o usuário

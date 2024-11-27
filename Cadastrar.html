@@ -20,13 +20,13 @@
     <header>
         <h1>ZenLife</h1>
         <nav>
-            <a href="login.html">Login</a>
+            <a href="Login.html">Login</a>
         </nav>
     </header>
 
     <main>
         <h2>Cadastro</h2>
-        <form id="cadastroForm" onsubmit="submitForm(event)">
+        <form id="cadastroForm" onsubmit="cadastrar(event)">
             <label for="nome">Nome Completo:</label>
             <input type="text" id="nome" name="nome" required>
 
@@ -36,8 +36,8 @@
             <label for="genero">Gênero:</label>
             <select id="genero" name="genero" required>
                 <option value="">Selecione...</option>
-                <option value="masculino">Masculino</option>
-                <option value="feminino">Feminino</option>
+                <option value="Homem">Masculino</option>
+                <option value="Mulher">Feminino</option>
                 <option value="outro">Outro</option>
             </select>
 
@@ -47,23 +47,12 @@
             <label for="senha">Senha:</label>
             <input type="password" id="senha" name="senha" required>
 
-            <label for="senha">Senha:</label>
-            <input type="password" id="senha" name="senha" required>
+            <label for="confirm_senha">Confirmar senha:</label>
+            <input type="password" id="senha2" name="senha2" required>
 
             <button type="submit">Cadastrar</button>
         </form>
     </main>
-
-    <script>
-        function submitForm(event) {
-            event.preventDefault(); // Impede o envio padrão do formulário
-            // Aqui você pode adicionar lógica para processar o cadastro
-
-            // Redireciona para o menu principal
-            window.location.href = 'menu.html';
-        }
-    </script>
-
 </body>
 
 </html>
