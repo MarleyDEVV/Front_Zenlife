@@ -77,7 +77,7 @@ function renderRotina(rotina) {
   const container = document.getElementById("visualizar_rotina");
   container.innerHTML = ""; // Limpa o conteúdo antes de renderizar
 
-  rotina.rotina[1].treinos.forEach((treino, index) => {
+  rotina.rotina[9].treinos.forEach((treino, index) => {
     // Criação do card de treino
     const treinoCard = document.createElement("div");
     treinoCard.classList.add("treino-card");
@@ -116,3 +116,37 @@ treinoCard.appendChild(infoButton);
     container.appendChild(treinoCard);
   });
 }
+
+// Função para deslogar o usuário
+function deslogarUsuario() {
+  // Fazendo uma requisição para a rota /deslogarusuario no servidor
+  fetch(`${apiBaseUrl}/deslogar`, {
+    method: 'GET', // ou 'POST', dependendo da sua API
+    headers: {
+      'Content-Type': 'application/json',
+      // Adicione aqui o token de autenticação se necessário
+      // 'Authorization': 'Bearer ' + token 
+    },
+  })
+    .then(response => {
+      if (response.ok) {
+        // Se a resposta for bem-sucedida, limpar dados do usuário (como cookies, localStorage ou sessionStorage)
+        // Ou se os dados estiverem em cookies, você pode apagá-los assim
+        document.cookie = "usuario=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+
+        // Redirecionar para a página 'index.html' após deslogar
+        window.location.href = '/index'; // ou '/index.html' se for um arquivo HTML estático
+      } else {
+        // Se houve algum erro ao deslogar
+        alert('Erro ao deslogar. Tente novamente.');
+      }
+    })
+    .catch(error => {
+      console.error('Erro ao deslogar:', error);
+      alert('Erro de conexão. Tente novamente.');
+    });
+}
+
+// Exemplo de como chamar a função ao clicar em um botão
+document.getElementById('btnDeslogar').addEventListener('click', deslogarUsuario);
+
