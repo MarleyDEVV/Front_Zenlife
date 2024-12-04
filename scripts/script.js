@@ -58,13 +58,14 @@ async function login(event) {
 
     const result = await response.json();
 
-    if (result.token) {
-      // Armazena o token no cookie com a flag `httpOnly` configurada pelo servidor
-      document.cookie = `Token=${result.token}`;
-
+    if (result) {
       document.getElementById(
         "result"
       ).innerText = `Login realizado com sucesso!`;
+
+      const user = await getUserByEmail(formData.login); // Aguarda o resultado
+      const idUser = user.id; // Acessa o campo `id` do objeto retornado
+      window.localStorage.setItem("usuarioId", idUser);
 
       // Redirecionar para a página principal após login
       setTimeout(() => {
@@ -81,12 +82,11 @@ async function login(event) {
 // Função para buscar rotina
 async function fetchRotina() {
   try {
-    const response = await fetch(`${apiBaseUrl}rotina`, {
+    const response = await fetch(`${apiBaseUrl}rotina/all/${window.localStorage.getItem("usuarioId")}`, {
       method: "GET",
-      credentials: "include", // Envia cookies junto com a requisição
       headers: {
         "Content-Type": "application/json", // Indica que o corpo da requisição está em JSON
-      }
+      },
     });
 
     if (!response.ok) {
@@ -139,24 +139,20 @@ function renderRotina(rotina) {
 document.addEventListener("DOMContentLoaded", () => {
   fetchRotina();
 });
-
 async function deslogarUsuario() {
   try {
-    // Faz a requisição ao endpoint de logout (confirme o endpoint correto com seu backend)
+    // Opcional: faça a requisição de logout ao backend, se necessário
     const response = await fetch(`${apiBaseUrl}deslogar`, {
-      method: "GET", // Logout geralmente usa POST
-      credentials: "include", // Inclui cookies na requisição
-      headers: {
-        "Content-Type": "application/json", // Cabeçalho padrão
-      },
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
     });
 
     if (!response.ok) {
       throw new Error(`Erro ao deslogar. Status: ${response.status}`);
     }
 
-    // Remove o cookie manualmente (apenas como garantia, se necessário)
-    document.cookie = "Token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+    // Limpa o localStorage
+    window.localStorage.clear();
 
     // Redirecionar para a página de login
     window.location.href = "Login.html";
@@ -165,8 +161,6 @@ async function deslogarUsuario() {
     alert("Não foi possível deslogar. Tente novamente.");
   }
 }
-
-// Adicionar o evento ao botão de logout
 
 // Submeter formulário com autenticação
 async function submitForm(event) {
@@ -182,24 +176,22 @@ async function submitForm(event) {
     lesao: document.getElementById("regiaoRestricao").value,
     area_desenvolvimento: document.getElementById("areasMusculares").value,
     duracao_rotina: document.getElementById("duracao").value,
+    id: window.localStorage.getItem("usuarioId"),
   };
-
+  showLoader();
   try {
     const response = await fetch(`${apiBaseUrl}rotina`, {
       method: "POST",
-      credentials: "include", // Envia cookies junto com a requisição
       headers: {
         "Content-Type": "application/json", // Indica que o corpo da requisição está em JSON
       },
       body: JSON.stringify(formData), // Converte os dados para JSON
     });
-
+    hideLoader();
     // Verificar se a resposta não foi bem-sucedida
     if (!response.ok) {
       if (response.status === 401) {
-        throw new Error(
-          "Não autorizado. Por favor, faça login novamente."
-        );
+        throw new Error("Não autorizado. Por favor, faça login novamente.");
       } else {
         throw new Error(`Erro: ${response.status}`);
       }
@@ -220,8 +212,34 @@ async function submitForm(event) {
     }
   } catch (error) {
     // Exibir mensagem de erro
+    hideLoader();
     document.getElementById(
       "result"
     ).innerText = `Erro ao gerar rotina: ${error.message}`;
   }
+}
+
+async function getUserByEmail(email) {
+  const response = await fetch(`${apiBaseUrl}user/email/${email}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json", // Indica que o corpo da requisição está em JSON
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error(`Erro HTTP! Status: ${response.status}`);
+  }
+
+  const rotina = await response.json();
+
+  return rotina;
+}
+
+function showLoader() {
+  document.getElementById("result").innerText = "Carregando...";
+}
+
+function hideLoader() {
+  document.getElementById("result").innerText = "";
 }
